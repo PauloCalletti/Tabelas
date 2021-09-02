@@ -2,28 +2,26 @@
 const {
   Model
 } = require('sequelize');
+const freelancer = require('./freelancer');
 module.exports = (sequelize, DataTypes) => {
-  class Freelancer extends Model {
+  class Curriculo extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Freelancer.hasMany(models.usuario)
+      Curriculo.belongsTo(models.freelancer)
     }
   };
-  Freelancer.init({
-    nome: DataTypes.STRING, 
-    CPF: DataTypes.INTEGER,
-    RG: DataTypes.INTEGER,
-    CEP: DataTypes.INTEGER,
-    curriculo: DataTypes.STRING,
-    area: DataTypes.STRING,
-    telefone: DataTypes.INTEGER
+  Curriculo.init({
+    habilidades: DataTypes.STRING,
+    experiencia: DataTypes.INTEGER,
+    formacao: DataTypes.STRING,
+    nivel: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'Freelancer',
+    modelName: 'Curriculo',
   });
-  return Freelancer;
+  return Curriculo;
 };

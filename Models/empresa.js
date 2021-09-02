@@ -2,35 +2,30 @@
 const {
   Model
 } = require('sequelize');
+const Usuario = require('./Usuario');
 module.exports = (sequelize, DataTypes) => {
-  class Usuario extends Model {
+  class Empresa extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Usuario.hasOne(models.Freelancer)
+      Empresa.hasMany(models.freelancer)
+      Empresa.hasMany(models.usuario)
     }
   };
-  Usuario.init({
-    ID: DataTypes.INTEGER,
+  Empresa.init({
     nome: DataTypes.STRING,
-    CPF: DataTypes.INTEGER,
-    email: DataTypes.STRING, 
+    CNPJ: DataTypes.INTEGER,
+    CEP: DataTypes.INTEGER,
+    area: DataTypes.STRING,
     telefone: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'Usuario',
+    modelName: 'Empresa',
   });
-  return Usuario;
-};
+  
 
-//cadastra novo usuario
-const user = await usuario.create({
-  nome: 'alice123',
-  isAdmin: true
-}, { fields: ['nome'] });
-console.log(user.nome); 
-console.log(user.isAdmin); 
-return user;
+  
+};  
